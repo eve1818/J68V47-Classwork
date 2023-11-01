@@ -14,7 +14,7 @@ public class lesson7e3 {
     }
 
     public static int wrong(int answer, int lives){
-        System.out.print("!You Are An Idiot And Got It Wrong");
+        System.out.println("!You Are An Idiot And Got It Wrong!");
         System.out.println(("the answer is " + answer));
         lives = lives-1;
         System.out.println("you have " + lives + " lives left");
