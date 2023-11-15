@@ -5,7 +5,7 @@ public class lesson7extra1 {
         System.out.println("------");
         System.out.println("1. Very easy maths (for idiots)");
         System.out.println("2. Hard maths (for the smart people)");
-        System.out.println("3. exit (if you are too dum for mathematics)");
+        System.out.println("3. exit (if you are too dumb for mathematics)");
     }
 
     public static int getOption(){

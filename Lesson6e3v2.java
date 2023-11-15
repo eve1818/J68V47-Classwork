@@ -1,5 +1,5 @@
 import java.util.*;
-public class Lesson6e32 {
+public class Lesson6e3v2 {
     public static void main(String[] args) {
         int correct = 0;
         int lives = 3;
