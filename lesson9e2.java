@@ -29,6 +29,7 @@ public class lesson9e2 {
     }
 
 
+
     public static void exception6() {
         // exception 6
         String thisString = "Hello";
@@ -61,6 +62,7 @@ public class lesson9e2 {
         } catch (Exception e){
             System.out.println(e.toString());
         }
+
 
         try {
             exception6();

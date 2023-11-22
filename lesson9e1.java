@@ -10,10 +10,10 @@ public class lesson9e1 {
             for (int i = 10; i >= 0; i--) {
                 String character = response.substring(0, 1);
                 response = response.substring(1, response.length());
-                System.out.print(character);
+                System.out.println(character);
             }
         } catch (Exception e){
-            System.out.println(" ");
+            System.out.println("sorry someting went worng");
         }
     }
 }

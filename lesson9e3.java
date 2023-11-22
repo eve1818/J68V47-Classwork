@@ -1,9 +1,18 @@
 import java.util.*;
 public class lesson9e3 {
     public static int askQuestion(int number1, int number2){
-        Scanner scanner = new Scanner(System.in);
-        System.out.format("What is %d + %d? ",number1, number2);
-        int userAnswer = scanner.nextInt();
+        int userAnswer = 0;
+        try {
+            Scanner scanner = new Scanner(System.in);
+            System.out.format("What is %d + %d? ", number1, number2);
+            userAnswer = scanner.nextInt();
+        } catch (Exception e){
+            System.out.println("Sorry something went wrong (it was probably your fault) please enter your answer again");
+            Scanner scanner = new Scanner(System.in);
+            System.out.format("What is %d + %d? ", number1, number2);
+            userAnswer = scanner.nextInt();
+        }
+
         return userAnswer;
     }
 
