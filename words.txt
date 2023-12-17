@@ -1,0 +1,11 @@
+lantern
+table
+alarm
+spider
+circus
+robot
+tower
+alien
+spaceship
+sun
+light
