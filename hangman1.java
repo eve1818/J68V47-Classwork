@@ -1,13 +1,10 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.*;
-import java.io.File;
+import java.io.*;
 
 public class hangman1 {
     public static String getWord(){
         String answerWord = "";
-        String[] words = {"lantern", "table", "alarm", "spider", "circus", "robot", "tower", "alien", "sun", "light"};
+        String[] words = {"lantern", "table", "alarm", "spider", "circus", "robot", "tower", "alien", "sun", "light", "fried"};
         System.out.println("1. Get a random word");
         System.out.println("2. Type in your own word");
         Scanner input = new Scanner(System.in);
@@ -16,6 +13,7 @@ public class hangman1 {
             System.out.print("Enter the word you want: ");
             Scanner inpu = new Scanner(System.in);
              answerWord = inpu.nextLine();
+             answerWord = answerWord.toLowerCase();
         } else if (wordWant == 1) {
             Random randomNum = new Random();
             int random = randomNum. nextInt(10);
@@ -28,6 +26,7 @@ public class hangman1 {
         Scanner input = new Scanner(System.in);
         System.out.print("What is your guess: ");
         String guess = input.nextLine();
+        guess = guess.toLowerCase();
         return guess;
     }
 
@@ -52,6 +51,113 @@ public class hangman1 {
         return updateGuess;
     }
 
+    public static void printLives(int lives){
+        if (lives == 0){
+            System.out.println("You have " + lives + " lives left");
+            System.out.println("  _____");
+            System.out.println("  |   |");
+            System.out.println("  |   O");
+            System.out.println("  |  /|!");
+            System.out.println("  |  /|");
+            System.out.println("  |");
+            System.out.println("-----");
+
+        } else if (lives == 1) {
+            System.out.println("You have " + lives + " lives left");
+            System.out.println("  _____");
+            System.out.println("  |   |");
+            System.out.println("  |   O");
+            System.out.println("  |  /|!");
+            System.out.println("  |  /");
+            System.out.println("  |");
+            System.out.println("-----");
+
+        } else if (lives == 2) {
+            System.out.println("You have " + lives + " lives left");
+            System.out.println("  _____");
+            System.out.println("  |   |");
+            System.out.println("  |   O");
+            System.out.println("  |  /|!");
+            System.out.println("  | ");
+            System.out.println("  |");
+            System.out.println("-----");
+
+        } else if (lives == 3) {
+            System.out.println("You have " + lives + " lives left");
+            System.out.println("  _____");
+        System.out.println("  |   |");
+        System.out.println("  |   O");
+        System.out.println("  |  /|");
+        System.out.println("  | ");
+        System.out.println("  |");
+        System.out.println("-----");
+
+    }  else if (lives == 4) {
+            System.out.println("You have " + lives + " lives left");
+            System.out.println("  _____");
+            System.out.println("  |   |");
+            System.out.println("  |   O");
+            System.out.println("  |   |");
+            System.out.println("  | ");
+            System.out.println("  |");
+            System.out.println("-----");
+
+        } else if (lives == 5) {
+            System.out.println("You have " + lives + " lives left");
+            System.out.println("  _____");
+            System.out.println("  |   |");
+            System.out.println("  |   O");
+            System.out.println("  |   ");
+            System.out.println("  | ");
+            System.out.println("  |");
+            System.out.println("-----");
+
+        } else if (lives == 6) {
+            System.out.println("You have " + lives + " lives left");
+            System.out.println("  _____");
+            System.out.println("  |   |");
+            System.out.println("  | ");
+            System.out.println("  | ");
+            System.out.println("  | ");
+            System.out.println("  |");
+            System.out.println("-----");
+
+        } else if (lives == 7) {
+            System.out.println("You have " + lives + " lives left");
+            System.out.println("  _____");
+            System.out.println("  |  ");
+            System.out.println("  |  ");
+            System.out.println("  |   ");
+            System.out.println("  | ");
+            System.out.println("  |");
+            System.out.println("-----");
+
+        }else if (lives == 8) {
+            System.out.println("You have " + lives + " lives left");
+            System.out.println(" ");
+            System.out.println("  |   ");
+            System.out.println("  |   ");
+            System.out.println("  |   ");
+            System.out.println("  | ");
+            System.out.println("  |");
+            System.out.println("-----");
+
+        } else if (lives == 9) {
+            System.out.println("You have " + lives + " lives left");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("-----");
+
+        } else if (lives == 10) {
+            System.out.println("You have " + lives + "lives left");
+
+        }
+    }
+
     public static boolean guessCorrect(String answerWord, String userGuess, String[] letters){
         //not used
         char l = userGuess.charAt(0);
@@ -73,14 +179,14 @@ public class hangman1 {
             int lives = 10;
             String answerWord = getWord();
             System.out.println(answerWord);
+            String[] letters = new String[answerWord.length()];
+            for( int i=0; i<letters.length; i++ ){
+                letters[i] = "_";
+            }
             String letterGuessed = "abcdefghijklmnopqrstuvwxyz";
             String wordright = "false";
             while (lives > 0 && wordright.equals("false")){
-                System.out.println("you have " + lives + " lives");
-                String[] letters = new String[answerWord.length()];
-                for( int i=0; i<letters.length; i++ ){
-                    letters[i] = "_";
-                }
+                printLives(lives);
                 int wordLength = answerWord.length();
                 int rightGuess = 0;
                 System.out.print("word: ");
@@ -94,7 +200,7 @@ public class hangman1 {
                 boolean guessCorrect = false;
                 for( int i=0; i<answerWord.length(); i++ ){
                     char check = answerWord.charAt(i);
-                    if (check == l){
+                if (check == l){
                         letters[i] = userGuess;
                         guessCorrect = true;
                     }
@@ -113,6 +219,26 @@ public class hangman1 {
                     wordright = "true";
                 }
             }
+            if (wordright.equals("true")){
+                monsterHealth = monsterHealth - 25;
+                System.out.println("!YOU FOUND OUT THE WORD");
+                System.out.println("Now the monster loses health");
+            } else if (wordright.equals("false")) {
+                System.out.println("You couldn't find the word");
+                System.out.print("this means you lose health and the monster lives on");
+            }
+            System.out.println("Monster Health: " + monsterHealth);
+            System.out.println("User Health: " + userHealth);
+        }
+        if (userHealth == 0){
+            System.out.println("!You Lost!");
+            System.out.println("sorry");
+        } else if (monsterHealth == 0) {
+            System.out.println("!!YOU WON!!");
+            System.out.println("You can now put your name on the winners list");
+            Scanner input = new Scanner(System.in);
+            System.out.println("Enter your name: ");
+            String winner = input.nextLine();
         }
     }
 }
