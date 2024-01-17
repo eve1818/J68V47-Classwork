@@ -37,7 +37,7 @@ public class hangman1 {
     //get one guess from the user
     public static String guessWord(){
         Scanner input = new Scanner(System.in);
-        System.out.print("What is your guess: ");
+        System.out.print("Enter your guess (it can only be one letter): ");
         String guess = input.nextLine();
         guess = guess.toLowerCase();
         return guess;
@@ -191,6 +191,9 @@ public class hangman1 {
 
     //main code
        public static void main(String[] args) {
+        System.out.println("....Game Starting...");
+        System.out.println("Welcome to ULTIMATE HANGMAN");
+        System.out.println();
         int userHealth = 100;
         int monsterHealth = 100;
 
@@ -231,6 +234,9 @@ public class hangman1 {
                 }
                 if (guessCorrect == false){
                     lives = lives -1;
+                    System.out.println("the letter is not in the word (soryy) :");
+                } else{
+                    System.out.println("The letter is in the word :)");
                 }
                 System.out.println();
                 int count = 0;
