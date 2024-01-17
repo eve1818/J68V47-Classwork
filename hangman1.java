@@ -5,10 +5,11 @@ import java.io.FileReader;
 public class hangman1 {
     public static String getWord(){
         String answerWord = "";
-        String[] words = {"lantern", "table", "alarm", "spider", "circus", "robot", "tower", "alien", "sun", "light", "fried"};
+        String[] words = {"lantern", "table", "alarm", "spider", "circus", "robot", "tower", "alien", "sun", "light", "fried", "paranormal", "darkness", "toaster", "makeup"};
         System.out.println("1. Get a random word");
         System.out.println("2. Type in your own word");
         Scanner input = new Scanner(System.in);
+        System.out.print("What would you like to do: ");
         int wordWant = input.nextInt();
         if (wordWant == 2){
             System.out.print("Enter the word you want: ");
@@ -17,9 +18,10 @@ public class hangman1 {
              answerWord = answerWord.toLowerCase();
         } else if (wordWant == 1) {
             Random randomNum = new Random();
-            int random = randomNum. nextInt(10);
+            int random = randomNum. nextInt(14);
             answerWord = words[random];
         }
+        System.out.println();
         return answerWord;
     }
 
@@ -32,22 +34,38 @@ public class hangman1 {
     }
 
     public static String checkGuess(String userGuess, String letterGuessed){
+        boolean rightguess1 = false;
+
+        while (rightguess1 == false){
+            int length = userGuess.length();
+            if (length == 1){
+                rightguess1 =true;
+            } else{
+                System.out.println("You can only guess one letter");
+                System.out.print("please guess again: ");
+                Scanner input = new Scanner(System.in);
+                userGuess = input.nextLine();
+                System.out.println();
+            }
+        }
+
+
         boolean rightGuess = false;
         boolean contains = letterGuessed.contains(userGuess);
-        while (rightGuess = false){
-            if (contains = true){
+        while (rightGuess == false){
+            if (contains == true){
                 rightGuess = true;
             } else{
-                System.out.println("you have already guessed that letter");
+                System.out.println("you have already guessed that letter or you guessed a number");
                 System.out.println("these are the letters you have left " + letterGuessed);
                 System.out.print("please guess again: ");
                 Scanner input = new Scanner(System.in);
-                letterGuessed = input.nextLine();
+                userGuess = input.nextLine();
+                System.out.println();
                 contains = letterGuessed.contains(userGuess);
 
             }
         }
-        letterGuessed = letterGuessed.replace(userGuess, ".");
         String updateGuess = userGuess.substring(0,1);
         return updateGuess;
     }
@@ -183,7 +201,6 @@ public class hangman1 {
         while (userHealth > 0 && monsterHealth > 0){
             int lives = 10;
             String answerWord = getWord();
-            System.out.println(answerWord);
             String[] letters = new String[answerWord.length()];
             for( int i=0; i<letters.length; i++ ){
                 letters[i] = "_";
@@ -202,7 +219,7 @@ public class hangman1 {
                 System.out.println();
                 String userGuess = guessWord();
                 String updateGuess = checkGuess(userGuess, letterGuessed);
-                letterGuessed = letterGuessed.replace(updateGuess," ");
+                letterGuessed = letterGuessed.replace(updateGuess,".");
                 char l = updateGuess.charAt(0);
                 boolean guessCorrect = false;
                 for( int i=0; i<answerWord.length(); i++ ){
@@ -212,7 +229,6 @@ public class hangman1 {
                         guessCorrect = true;
                     }
                 }
-                System.out.println(guessCorrect);
                 if (guessCorrect == false){
                     lives = lives -1;
                 }
@@ -228,8 +244,8 @@ public class hangman1 {
                 }
             }
             if (wordright.equals("true")){
-                monsterHealth = monsterHealth - 100;
-                System.out.println("!YOU FOUND OUT THE WORD");
+                monsterHealth = monsterHealth - 25;
+                System.out.println("!YOU FOUND OUT THE WORD!");
                 System.out.println("Now the monster loses health");
                 System.out.println("");
             } else if (wordright.equals("false")) {
@@ -250,22 +266,26 @@ public class hangman1 {
             System.out.println("!!YOU WON!!");
             System.out.println("You can now put your name on the winners list");
             Scanner input = new Scanner(System.in);
-            System.out.println("Enter your name: ");
+            System.out.print("Enter your name: ");
             String winner = input.nextLine();
 
-            String[] readingFile = {"", "", "", "", "", "", "", "", "", "", "", "", "","","",""};
-            int count = 0;
+            String previousWinners = "";
+            try{
+                BufferedReader in = new BufferedReader( new FileReader("hangmanWinners.txt") );
+                previousWinners = in.readLine();
 
-            try {
-                BufferedReader i = new BufferedReader(new FileReader("winners.txt"));
-                String winnerFile = "";
-                winnerFile = i.readLine();
-                PrintWriter out = new PrintWriter( new FileWriter("winners.txt") );
-                System.out.print(winnerFile);
-                System.out.print(winner);
-            } catch (IOException e){
-                System.out.println("Sorry something went wrong when writing your name to file");
+            }catch (IOException e){
+
             }
+            try{
+                FileWriter out = new FileWriter("hangmanWinners.txt");
+                out.write(winner + ", " + previousWinners);
+                out.close();
+
+            } catch (IOException e){
+                System.out.println("sorry something went wrong when writing winner name to file");
+            }
+
         }
     }
 }
