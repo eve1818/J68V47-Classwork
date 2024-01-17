@@ -1,5 +1,6 @@
 import java.util.*;
 import java.io.*;
+import java.io.FileReader;
 
 public class hangman1 {
     public static String getWord(){
@@ -153,7 +154,7 @@ public class hangman1 {
             System.out.println("-----");
 
         } else if (lives == 10) {
-            System.out.println("You have " + lives + "lives left");
+            System.out.println("You have " + lives + " lives left");
 
         }
     }
@@ -175,6 +176,10 @@ public class hangman1 {
         int userHealth = 100;
         int monsterHealth = 100;
 
+        System.out.println("Monster Health: " + monsterHealth);
+        System.out.println("User Health: " + userHealth);
+        System.out.println("");
+
         while (userHealth > 0 && monsterHealth > 0){
             int lives = 10;
             String answerWord = getWord();
@@ -187,6 +192,7 @@ public class hangman1 {
             String wordright = "false";
             while (lives > 0 && wordright.equals("false")){
                 printLives(lives);
+                System.out.println("The letters you haven't guessed are: " + letterGuessed);
                 int wordLength = answerWord.length();
                 int rightGuess = 0;
                 System.out.print("word: ");
@@ -196,17 +202,19 @@ public class hangman1 {
                 System.out.println();
                 String userGuess = guessWord();
                 String updateGuess = checkGuess(userGuess, letterGuessed);
-                char l = userGuess.charAt(0);
+                letterGuessed = letterGuessed.replace(updateGuess," ");
+                char l = updateGuess.charAt(0);
                 boolean guessCorrect = false;
                 for( int i=0; i<answerWord.length(); i++ ){
                     char check = answerWord.charAt(i);
-                if (check == l){
+                if (check ==  l){
                         letters[i] = userGuess;
                         guessCorrect = true;
                     }
                 }
-                if (guessCorrect = false){
-                    lives--;
+                System.out.println(guessCorrect);
+                if (guessCorrect == false){
+                    lives = lives -1;
                 }
                 System.out.println();
                 int count = 0;
@@ -220,15 +228,20 @@ public class hangman1 {
                 }
             }
             if (wordright.equals("true")){
-                monsterHealth = monsterHealth - 25;
+                monsterHealth = monsterHealth - 100;
                 System.out.println("!YOU FOUND OUT THE WORD");
                 System.out.println("Now the monster loses health");
+                System.out.println("");
             } else if (wordright.equals("false")) {
+                userHealth = userHealth -25;
                 System.out.println("You couldn't find the word");
                 System.out.print("this means you lose health and the monster lives on");
+                System.out.println("");
             }
             System.out.println("Monster Health: " + monsterHealth);
             System.out.println("User Health: " + userHealth);
+            System.out.println("________");
+            System.out.println();
         }
         if (userHealth == 0){
             System.out.println("!You Lost!");
@@ -239,6 +252,20 @@ public class hangman1 {
             Scanner input = new Scanner(System.in);
             System.out.println("Enter your name: ");
             String winner = input.nextLine();
+
+            String[] readingFile = {"", "", "", "", "", "", "", "", "", "", "", "", "","","",""};
+            int count = 0;
+
+            try {
+                BufferedReader i = new BufferedReader(new FileReader("winners.txt"));
+                String winnerFile = "";
+                winnerFile = i.readLine();
+                PrintWriter out = new PrintWriter( new FileWriter("winners.txt") );
+                System.out.print(winnerFile);
+                System.out.print(winner);
+            } catch (IOException e){
+                System.out.println("Sorry something went wrong when writing your name to file");
+            }
         }
     }
 }
