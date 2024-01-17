@@ -3,28 +3,38 @@ import java.io.*;
 import java.io.FileReader;
 
 public class hangman1 {
+
+    //get the word based off what the user wants
     public static String getWord(){
         String answerWord = "";
+        boolean correct = false;
         String[] words = {"lantern", "table", "alarm", "spider", "circus", "robot", "tower", "alien", "sun", "light", "fried", "paranormal", "darkness", "toaster", "makeup"};
-        System.out.println("1. Get a random word");
-        System.out.println("2. Type in your own word");
-        Scanner input = new Scanner(System.in);
-        System.out.print("What would you like to do: ");
-        int wordWant = input.nextInt();
-        if (wordWant == 2){
-            System.out.print("Enter the word you want: ");
-            Scanner inpu = new Scanner(System.in);
-             answerWord = inpu.nextLine();
-             answerWord = answerWord.toLowerCase();
-        } else if (wordWant == 1) {
-            Random randomNum = new Random();
-            int random = randomNum. nextInt(14);
-            answerWord = words[random];
+        while(correct == false) {
+            System.out.println("1. Get a random word");
+            System.out.println("2. Type in your own word");
+            Scanner input = new Scanner(System.in);
+            System.out.print("What would you like to do: ");
+            int wordWant = input.nextInt();
+            if (wordWant == 2) {
+                System.out.print("Enter the word you want: ");
+                Scanner inpu = new Scanner(System.in);
+                answerWord = inpu.nextLine();
+                answerWord = answerWord.toLowerCase();
+                correct = true;
+            } else if (wordWant == 1) {
+                Random randomNum = new Random();
+                int random = randomNum.nextInt(14);
+                answerWord = words[random];
+                correct = true;
+            } else {
+                System.out.println("please enter the one of the options (1 or 2) ");
+            }
         }
         System.out.println();
         return answerWord;
     }
 
+    //get one guess from the user
     public static String guessWord(){
         Scanner input = new Scanner(System.in);
         System.out.print("What is your guess: ");
@@ -33,6 +43,7 @@ public class hangman1 {
         return guess;
     }
 
+    //check to see if they have only guessed one letter and if they have guessed the letter before
     public static String checkGuess(String userGuess, String letterGuessed){
         boolean rightguess1 = false;
 
@@ -70,6 +81,7 @@ public class hangman1 {
         return updateGuess;
     }
 
+    //print out hangman man showing how many lives are left
     public static void printLives(int lives){
         if (lives == 0){
             System.out.println("You have " + lives + " lives left");
@@ -163,12 +175,12 @@ public class hangman1 {
 
         } else if (lives == 9) {
             System.out.println("You have " + lives + " lives left");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println();
             System.out.println("-----");
 
         } else if (lives == 10) {
@@ -177,20 +189,8 @@ public class hangman1 {
         }
     }
 
-    public static boolean guessCorrect(String answerWord, String userGuess, String[] letters){
-        //not used
-        char l = userGuess.charAt(0);
-        boolean guessCorrect = false;
-        for( int i=0; i<answerWord.length(); i++ ){
-            char check = answerWord.charAt(i);
-            if (check == l){
-                letters[i] = userGuess;
-                guessCorrect = true;
-            }
-        }
-        return guessCorrect;
-    }
-    public static void main(String[] args) {
+    //main code
+       public static void main(String[] args) {
         int userHealth = 100;
         int monsterHealth = 100;
 
@@ -251,7 +251,8 @@ public class hangman1 {
             } else if (wordright.equals("false")) {
                 userHealth = userHealth -25;
                 System.out.println("You couldn't find the word");
-                System.out.print("this means you lose health and the monster lives on");
+                System.out.println("this means you lose health and the monster lives on");
+                System.out.println("The word was: " + answerWord);
                 System.out.println("");
             }
             System.out.println("Monster Health: " + monsterHealth);
@@ -283,9 +284,11 @@ public class hangman1 {
                 out.close();
 
             } catch (IOException e){
-                System.out.println("sorry something went wrong when writing winner name to file");
+                System.out.println("sorry something went wrong when writing your name to file");
             }
 
         }
+        System.out.println("...game finished...");
     }
+
 }
