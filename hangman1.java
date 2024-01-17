@@ -214,7 +214,6 @@ public class hangman1 {
                 printLives(lives);
                 System.out.println("The letters you haven't guessed are: " + letterGuessed);
                 int wordLength = answerWord.length();
-                int rightGuess = 0;
                 System.out.print("word: ");
                 for( int i=0; i<letters.length; i++ ){
                     System.out.print(letters[i]);
@@ -234,7 +233,7 @@ public class hangman1 {
                 }
                 if (guessCorrect == false){
                     lives = lives -1;
-                    System.out.println("the letter is not in the word (soryy) :");
+                    System.out.println("the letter is not in the word (sorry) :");
                 } else{
                     System.out.println("The letter is in the word :)");
                 }
@@ -252,14 +251,15 @@ public class hangman1 {
             if (wordright.equals("true")){
                 monsterHealth = monsterHealth - 25;
                 System.out.println("!YOU FOUND OUT THE WORD!");
-                System.out.println("Now the monster loses health");
-                System.out.println("");
+                System.out.println("The word was: " + answerWord);
+                System.out.println("The monster's health is getting lower");
+                System.out.println();
             } else if (wordright.equals("false")) {
                 userHealth = userHealth -25;
                 System.out.println("You couldn't find the word");
-                System.out.println("this means you lose health and the monster lives on");
                 System.out.println("The word was: " + answerWord);
-                System.out.println("");
+                System.out.println("be careful your health is getting lower");
+                System.out.println();
             }
             System.out.println("Monster Health: " + monsterHealth);
             System.out.println("User Health: " + userHealth);
@@ -267,10 +267,10 @@ public class hangman1 {
             System.out.println();
         }
         if (userHealth == 0){
-            System.out.println("!You Lost!");
+            System.out.println("!THE MONSTER BEAT YOU AND YOU LOST (sorry)!");
             System.out.println("sorry");
         } else if (monsterHealth == 0) {
-            System.out.println("!!YOU WON!!");
+            System.out.println("!!YOU BEAT THE MONSTER AND WON!!");
             System.out.println("You can now put your name on the winners list");
             Scanner input = new Scanner(System.in);
             System.out.print("Enter your name: ");
