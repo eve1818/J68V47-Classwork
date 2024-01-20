@@ -10,8 +10,8 @@ public class hangman1 {
         boolean correct = false;
         String[] words = {"lantern", "table", "alarm", "spider", "circus", "robot", "tower", "alien", "sun", "light", "fried", "paranormal", "darkness", "toaster", "makeup"};
         while(correct == false) {
-            System.out.println("1. Get a random word");
-            System.out.println("2. Type in your own word");
+            System.out.println("1. Get a random word (one player)");
+            System.out.println("2. Type in your own word (two player)");
             Scanner input = new Scanner(System.in);
             System.out.print("What would you like to do: ");
             int wordWant = input.nextInt();
@@ -67,13 +67,30 @@ public class hangman1 {
             if (contains == true){
                 rightGuess = true;
             } else{
-                System.out.println("you have already guessed that letter or you guessed a number");
+                System.out.println("you have already guessed that letter (or you didn't guess a letter)");
                 System.out.println("these are the letters you have left " + letterGuessed);
                 System.out.print("please guess again: ");
                 Scanner input = new Scanner(System.in);
                 userGuess = input.nextLine();
                 System.out.println();
                 contains = letterGuessed.contains(userGuess);
+
+            }
+        }
+
+        boolean rightGuess2 = false;
+        boolean contains2 = userGuess.contains(".");
+        while (rightGuess2 == false){
+            if (contains2 == false){
+                rightGuess2 = true;
+            } else{
+                System.out.println("you have already guessed that letter (or you didn't guess a letter)");
+                System.out.println("these are the letters you have left " + letterGuessed);
+                System.out.print("please guess again: ");
+                Scanner input = new Scanner(System.in);
+                userGuess = input.nextLine();
+                System.out.println();
+                contains2 = userGuess.contains(".");
 
             }
         }
@@ -227,7 +244,7 @@ public class hangman1 {
                 for( int i=0; i<answerWord.length(); i++ ){
                     char check = answerWord.charAt(i);
                 if (check ==  l){
-                        letters[i] = userGuess;
+                        letters[i] = updateGuess;
                         guessCorrect = true;
                     }
                 }
@@ -250,13 +267,15 @@ public class hangman1 {
             }
             if (wordright.equals("true")){
                 monsterHealth = monsterHealth - 25;
+                printLives(lives);
                 System.out.println("!YOU FOUND OUT THE WORD!");
                 System.out.println("The word was: " + answerWord);
                 System.out.println("The monster's health is getting lower");
                 System.out.println();
             } else if (wordright.equals("false")) {
                 userHealth = userHealth -25;
-                System.out.println("You couldn't find the word");
+                printLives(lives);
+                System.out.println("!!You couldn't find the word!!");
                 System.out.println("The word was: " + answerWord);
                 System.out.println("be careful your health is getting lower");
                 System.out.println();
