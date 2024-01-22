@@ -8,7 +8,7 @@ public class hangman1 {
     public static String getWord(){
         String answerWord = "";
         boolean correct = false;
-        String[] words = {"lantern", "table", "alarm", "spider", "circus", "robot", "tower", "alien", "sun", "light", "fried", "paranormal", "darkness", "toaster", "makeup"};
+        String[] words = {"lantern", "table", "alarm", "spider", "circus", "robot", "tower", "alien", "sun", "light", "fried", "paranormal", "darkness", "toaster", "makeup", "curtain", "lonely"};
         while(correct == false) {
             System.out.println("1. Get a random word (one player)");
             System.out.println("2. Type in your own word (two player)");
@@ -210,6 +210,8 @@ public class hangman1 {
        public static void main(String[] args) {
         System.out.println("....Game Starting...");
         System.out.println("Welcome to ULTIMATE HANGMAN");
+        System.out.println("Try to guess the word and beat the monster");
+        System.out.println("But watch out in case your health gets too low");
         System.out.println();
         int userHealth = 100;
         int monsterHealth = 100;
@@ -250,7 +252,7 @@ public class hangman1 {
                 }
                 if (guessCorrect == false){
                     lives = lives -1;
-                    System.out.println("the letter is not in the word (sorry) :");
+                    System.out.println("the letter is not in the word (sorry)");
                 } else{
                     System.out.println("The letter is in the word :)");
                 }
