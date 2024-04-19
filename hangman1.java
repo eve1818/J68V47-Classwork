@@ -303,7 +303,10 @@ public class hangman1 {
                 previousWinners = in.readLine();
 
             }catch (IOException e){
-
+                System.out.println("sorry something went wrong when writing your name to file");
+            }
+            if (previousWinners == null){
+                previousWinners = " ";
             }
             try{
                 FileWriter out = new FileWriter("hangmanWinners.txt");
