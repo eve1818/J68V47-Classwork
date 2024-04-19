@@ -14,14 +14,14 @@ public class hangman1 {
             System.out.println("2. Type in your own word (two player)");
             Scanner input = new Scanner(System.in);
             System.out.print("What would you like to do: ");
-            int wordWant = input.nextInt();
-            if (wordWant == 2) {
+            String wordWant = input.nextLine();
+            if (wordWant.equals("2")) {
                 System.out.print("Enter the word you want: ");
                 Scanner inpu = new Scanner(System.in);
                 answerWord = inpu.nextLine();
                 answerWord = answerWord.toLowerCase();
                 correct = true;
-            } else if (wordWant == 1) {
+            } else if (wordWant.equals("1")) {
                 Random randomNum = new Random();
                 int random = randomNum.nextInt(14);
                 answerWord = words[random];
